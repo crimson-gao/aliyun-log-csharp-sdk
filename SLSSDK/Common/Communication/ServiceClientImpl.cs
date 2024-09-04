@@ -423,6 +423,17 @@ namespace Aliyun.Api.LOG.Common.Communication
                 _addInternalMethod = mi;
             }
 
+            if (_addInternalMethod == null)
+            {
+                MethodInfo mi = typeof(WebHeaderCollection).GetMethod(
+                    "AddWithoutValidate",
+                    BindingFlags.NonPublic | BindingFlags.Instance,
+                    null,
+                    new Type[] { typeof(string), typeof(string) },
+                    null);
+                _addInternalMethod = mi;
+            }
+
             _addInternalMethod.Invoke(headers, new object[] { key, value });
         }
     }
